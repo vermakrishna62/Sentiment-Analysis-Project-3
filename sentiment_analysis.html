@@ -1,0 +1,146 @@
+{% load django_bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentimental Analysis</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Custom CSS for Styling -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container-fluid {
+            margin-top: 50px;
+        }
+
+        .input-form {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .input-form h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        .form-label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-control {
+            border: 2px solid #e2e2e2;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            color: gray;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: none;
+        }
+
+        .btn-generate {
+            background-color: gray;
+            border: none;
+            border-radius: 30px;
+            color: #fff;
+            padding: 12px 60px;
+            font-size: 18px;
+        }
+
+        .btn-generate:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+
+        .generated-data {
+            background-color: #f2f2f2;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            max-height: 400px;
+            overflow-y: scroll;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .generated-data h3 {
+            font-size: 24px;
+            color: #333;
+            margin-top: 0;
+        }
+
+        .generated-data p {
+            font-size: 16px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="input-form mb-5">
+                    <h2 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                        <span><i class="fa-solid fa-inbox"></i></span>&nbsp;Sentimental Analysis
+                    </h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <textarea class="form-control" name="input_text" rows="8" required
+                                placeholder="Enter your input..."></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-generate"><i
+                                    class="fa-brands fa-modx"></i></span>&nbsp;Analyze Sentiment</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="generated-data">
+                    {% comment %} <h4
+                        style="font-size:22px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+                        <span><i class="fa-solid fa-book" style="font-size: 18px;"></i></span>&nbsp;Generated Data
+                    </h4> {% endcomment %}
+                    <p class="pt-2">
+                        {% if score %}
+                    <h2></h2>
+                    <p class="text-center" style="font-size: 30px;">
+                        Sentiment :&nbsp;
+                        {% if score == "positive" %}
+                        😃 Positive
+                        {% elif score == "negative" %}
+                        😞 Negative
+                        {% else %}
+                        😐 Neutral
+                        {% endif %}
+                    </p>
+                    {% else %}
+                    {% endif %}
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
